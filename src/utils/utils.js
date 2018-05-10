@@ -1,5 +1,6 @@
 const URL = 'https://jsonplaceholder.typicode.com/posts';
 const DEFAULT_LIST_LENGTH = 10;
+const CASE_SENSITIVE = true;
 
 export const getList = (params = {}) => {
   return new Promise((resolve, reject) => {
@@ -18,6 +19,11 @@ export const shortenList = (list, len = DEFAULT_LIST_LENGTH) => {
   return list.slice(0, len);
 }
 
+const serializeText = (text) => {
+  return CASE_SENSITIVE && typeof text === 'string' ? text.toUpperCase() : text;
+}
+
 export const filterList = (list, text) => {
-  return text ? list.filter(item => item.title.includes(text)) : list;
+  const value = serializeText(text);
+  return text ? list.filter(item => serializeText(item.title).includes(value)) : list;
 }

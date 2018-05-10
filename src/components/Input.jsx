@@ -7,7 +7,6 @@ export default class Input extends Component {
 
   onChange = (e) => {
     const value = e.target.value;
-    console.log(['onChange'], value)
 
     this.setState({ value })
     this.props.updateFilterText(value);
