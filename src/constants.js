@@ -1,0 +1,1 @@
+export const UPDATE_PHRASE = 'UPDATE_PHRASE';

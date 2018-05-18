@@ -4,19 +4,29 @@ import { getList, shortenList, filterList } from './../utils/utils'
 export default class List extends Component {
   state = {
     items: [],
+    errors: '',
     loading: true
   }
 
   componentDidMount() {
-    getList()
-    .then(list => {
-      const items = shortenList(list);
+    getList(null, { mode: 'no-cors' })
+    .then(res => {
+      // const items = shortenList(res);
+      const items = res;
 
       this.setState({ 
-        items, 
-        loading: false
+        loading: false,
+        items
       });
     })
+    .catch(err => {
+      console.log(`Error while fetching data, check if the URL above is correct.\n${err}`);
+
+      this.setState({
+        loading: false,
+        errors: String(err)
+      });
+    });
   }
 
   render() {
@@ -24,18 +34,23 @@ export default class List extends Component {
     
     if(!this.state.loading) {
       return (
-        <ul>
-          {filteredItems.map((item, index) => {
-            return (
-              <li key={index}>
-                <h1>{item.id}</h1>
-                <h2>{item.title}</h2>
-                <p>{item.body}</p>
-                <span>userId: {item.userId}</span>
-              </li>
-            )
-          })}
-        </ul>
+        <div>
+          {this.state.errors && <div style={{color: 'red'}}>
+            {this.state.errors}
+          </div>}
+          <ul>
+            {filteredItems.map((item, index) => {
+              return (
+                <li key={index}>
+                  <h1>{item.id}</h1>
+                  <h2>{item.title}</h2>
+                  <p>{item.body}</p>
+                  <span>userId: {item.userId}</span>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       )
     }
 
