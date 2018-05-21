@@ -1,20 +1,15 @@
 import { UPDATE_PHRASE } from '../constants';
+import { filterPhrase } from './input';
 
-const preparePhraseAction = (action) => {
-  return { 
-    text: action.text,
-    id: Math.random()
-  };
-} 
+const initialState = {
+  list: [],
+  filterPhrase: ''
+};
 
-const actions = (state = {}, action) => {
-  let result = null;
-  switch(action.type) {
-    case UPDATE_PHRASE:
-    result = { filterText: preparePhraseAction(action)};
-      console.log('actions as state', result);
-      return result;
+function reducer(state = initialState, action) {
+  return {
+    filterPhrase: filterPhrase(state.filterPhrase, action)
   }
 }
 
-export default actions;
+export default reducer;

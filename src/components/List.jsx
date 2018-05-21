@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getList, shortenList, filterList } from './../utils/utils'
+import { getList, filterList } from '../utils/utils';
+import Item from './Item';
 
 export default class List extends Component {
   state = {
@@ -9,7 +10,7 @@ export default class List extends Component {
   }
 
   componentDidMount() {
-    getList(null, { mode: 'no-cors' })
+    getList()
     .then(res => {
       // const items = shortenList(res);
       const items = res;
@@ -40,14 +41,7 @@ export default class List extends Component {
           </div>}
           <ul>
             {filteredItems.map((item, index) => {
-              return (
-                <li key={index}>
-                  <h1>{item.id}</h1>
-                  <h2>{item.title}</h2>
-                  <p>{item.body}</p>
-                  <span>userId: {item.userId}</span>
-                </li>
-              )
+              return <Item item={item} index={index} key={index} />
             })}
           </ul>
         </div>

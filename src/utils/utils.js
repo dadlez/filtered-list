@@ -2,7 +2,7 @@ import qs from 'qs';
 import { BASE_URL, DEFAULT_LIST_LENGTH, CASE_SENSITIVE } from './config';
 
 const URL_PARAMS = {
-  // id: { lte: DEFAULT_LIST_LENGTH } // why not working?
+  // id: { lte: DEFAULT_LIST_LENGTH } // not working
   id: [getIdRangeArr(DEFAULT_LIST_LENGTH)]
 }
 
@@ -19,7 +19,7 @@ export const getList = (params = {}) => {
   const stringifiedUrlParams = qs.stringify(URL_PARAMS, { indices: false })
   console.log(`Fetching data from: ${BASE_URL}?${stringifiedUrlParams}`)
   
-  return fetch(`${BASE_URL}l?${stringifiedUrlParams}`, params)
+  return fetch(`${BASE_URL}?${stringifiedUrlParams}`, params)
     .then(res => {
       if(!res.ok) {
         throw new Error(res.status);

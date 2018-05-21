@@ -1,10 +1,8 @@
 import { UPDATE_PHRASE } from '../constants';
 
-export const updatePhrase = (text) => {
-  const action = { 
+export function updatePhrase(text) {
+  return {
     type: UPDATE_PHRASE,
     text
-  };
-  console.log('action in updatePhrase', action);
-  return action;
+  }
 }

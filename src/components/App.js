@@ -1,38 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { updatePhrase } from '../actions';
-import './App.css';
-import Input from './Input';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Input from '../containers/Input';
 import List from './List';
+import Button from './Button';
 
-class App extends Component {
-  state = {
-    list: [],
-    filterText: ''
-  }
 
-  updateFilterText = (filterText) => {
-    this.setState({ filterText });
-    this.props.updatePhrase(filterText);
-  }
-  
-  render() {
-    return (
-      <div className="App">
-        <Input updateFilterText={this.updateFilterText} />
-        <List filterText={this.state.filterText} />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div>
+    <Input />
+    <Button />
+    <List />
+  </div>
+)
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updatePhrase }, dispatch);
-}
-
-function mapStateToProps(state) {
-  return { actions: state }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
