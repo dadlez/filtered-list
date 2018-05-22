@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import { fetchList } from '../actions';
-import Button from '../components/Button';
+import List from '../components/List';
 
 const mapStateToProps = state => {
   return {
-    text: state.filterPhrase
+    items: state.list
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClick: () => dispatch(fetchList())
+    fetchList: () => dispatch(fetchList())
   }
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Button);;
+)(List);;

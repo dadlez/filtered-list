@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Input from '../containers/Input';
-import List from './List';
-import Button from './Button';
+import Button from '../containers/Button';
+import List from '../containers/List';
 
 
 const App = () => (

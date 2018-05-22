@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Input = ({ text, onChange }) => (
-  <input 
-    type='text'
-    value={text}
-    onChange={onChange}
-  />
-)
+export default ({ text, onChange }) => {
+  const handleChange = event => onChange(event.target.value);
+  
+  return (
+    <input 
+      type='text'
+      value={text}
+      onChange={handleChange}
+    />
+  );
 
-export default Input;
+}

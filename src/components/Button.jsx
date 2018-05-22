@@ -1,7 +1,5 @@
 import React from 'react';
 
-const Button = ({ onClick }) => (
+export default ({ onClick }) => (
   <button onClick={onClick}>update!</button>
 );
-
-export default Button;

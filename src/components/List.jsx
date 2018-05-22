@@ -1,37 +1,23 @@
 import React, { Component } from 'react';
-import { getList, filterList } from '../utils/utils';
 import Item from './Item';
 
 export default class List extends Component {
   state = {
     items: [],
     errors: '',
-    loading: true
+    loading: false
   }
 
   componentDidMount() {
-    getList()
-    .then(res => {
-      // const items = shortenList(res);
-      const items = res;
+    this.props.fetchList();
+  }
 
-      this.setState({ 
-        loading: false,
-        items
-      });
-    })
-    .catch(err => {
-      console.log(`Error while fetching data, check if the URL above is correct.\n${err}`);
-
-      this.setState({
-        loading: false,
-        errors: String(err)
-      });
-    });
+  componentWillReceiveProps({ items }) {
+    this.setState({ items })
   }
 
   render() {
-    const filteredItems = filterList(this.state.items, this.props.filterText);
+    // const filteredItems = filterList(this.state.items, this.props.filterText);
     
     if(!this.state.loading) {
       return (
@@ -40,14 +26,18 @@ export default class List extends Component {
             {this.state.errors}
           </div>}
           <ul>
-            {filteredItems.map((item, index) => {
-              return <Item item={item} index={index} key={index} />
+            {this.state.items.map((item, index) => {
+              return (
+                <li key={index}>
+                  <Item item={item} />
+                </li>
+              )
             })}
           </ul>
         </div>
       )
     }
 
-    return null 
+    return <div>LOADING... PLEASE WAIT</div> 
   }
 }
