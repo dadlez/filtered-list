@@ -2,7 +2,10 @@ import { filterPhrase } from './updateFilterPhrase';
 import { fetchedItems } from './fetchedItems';
 
 const initialState = {
-  list: [],
+  list: {
+    items: [],
+    cachedItemsIds: [] //cache for searching title in initially fetched items only
+  },
   errors: '',
   filterPhrase: '',
   loading: false

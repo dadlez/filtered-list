@@ -16,11 +16,10 @@ const itemsFetched = (list) => {
 }
 
 export const fetchList = () => (dispatch, getState) => {
-  const seed = getState().filterPhrase;
+  const { filterPhrase, list: { cachedItemsIds } } = getState();
   
-  getList({ title_like: seed })
+  getList({ filterPhrase, cachedItemsIds })
   .then(res => dispatch(itemsFetched(res)))
-  .catch(err => {
-    console.log(`Error while fetching data, check if the URL above is correct.\n${err}`);
-  });
+  .catch(err => { console.log(`Error while fetching data, check if the URL above is correct.\n${err}`) }
+  );
 }

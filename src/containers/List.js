@@ -4,7 +4,7 @@ import List from '../components/List';
 
 const mapStateToProps = state => {
   return {
-    items: state.list
+    items: state.list.items
   }
 };
 
