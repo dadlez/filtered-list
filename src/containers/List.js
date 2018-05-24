@@ -3,8 +3,10 @@ import { fetchList } from '../actions';
 import List from '../components/List';
 
 const mapStateToProps = state => {
+  console.log('List mapstateotprops state', state)
   return {
-    items: state.list.items
+    items: state.list.items,
+    errors: state.errors
   }
 };
 

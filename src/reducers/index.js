@@ -1,5 +1,6 @@
-import { filterPhrase } from './updateFilterPhrase';
-import { fetchedItems } from './fetchedItems';
+import filterPhrase from './filterPhrase';
+import list from './list';
+import errors from './errors';
 
 const initialState = {
   list: {
@@ -12,9 +13,11 @@ const initialState = {
 };
 
 function reducer(state = initialState, action) {
+  console.log('fire reducer', state)  
   return {
     filterPhrase: filterPhrase(state.filterPhrase, action),
-    list: fetchedItems(state.list, action)
+    list: list(state.list, action),
+    errors: errors(state.errors, action)
   }
 }
 

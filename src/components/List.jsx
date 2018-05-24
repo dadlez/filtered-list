@@ -12,21 +12,21 @@ export default class List extends Component {
     this.props.fetchList();
   }
 
-  componentWillReceiveProps({ items }) {
-    this.setState({ items })
+  componentWillReceiveProps({ items, errors }) {
+    this.setState({ items, errors })
   }
 
   render() {
-    // const filteredItems = filterList(this.state.items, this.props.filterText);
-    
-    if(!this.state.loading) {
+    const { items = [], errors, loading } = this.state;
+
+    if(!loading) {
       return (
         <div>
-          {this.state.errors && <div style={{color: 'red'}}>
-            {this.state.errors}
+          {errors && <div style={{color: 'red'}}>
+            {errors}
           </div>}
           <ul>
-            {this.state.items.map((item, index) => {
+            {items.map((item, index) => {
               return (
                 <li key={index}>
                   <Item item={item} />
